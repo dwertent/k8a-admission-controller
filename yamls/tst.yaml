@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhook
+  namespace: test
+  labels:
+    app: webhook
+    tier: test
+spec:
+  selector:         
+    matchLabels:
+      app: webhook
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webhook
+        tier: test
+    spec:
+      containers:
+        - name: webhook
+          image: webhook:v0
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 300m
+              memory: 100Mi
+            limits:
+              cpu: 1500m
+              memory: 600Mi
